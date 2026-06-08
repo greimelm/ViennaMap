@@ -1,0 +1,6 @@
+@ViennaMap.Server_HostAddress = http://localhost:5294
+
+GET {{ViennaMap.Server_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

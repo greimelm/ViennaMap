@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="viennamap.client/viennamap.client.esproj">
+    <Build />
+    <Deploy />
+  </Project>
+  <Project Path="ViennaMap.Server/ViennaMap.Server.csproj" />
+</Solution>

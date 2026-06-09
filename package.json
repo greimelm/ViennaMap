@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "@types/leaflet": "^1.9.21",
+    "react-leaflet": "^5.0.0"
+  }
+}

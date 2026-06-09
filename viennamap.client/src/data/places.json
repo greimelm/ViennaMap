@@ -1,0 +1,10 @@
+[
+  {
+    "id": 1,
+    "name": "Cafe Central",
+    "category": "cafe",
+    "lat": 48.210033,
+    "lng": 16.363449,
+    "description": "Historic cafe in Vienna"
+  }
+]

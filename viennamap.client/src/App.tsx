@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import './App.css';
 import Map from './components/Map';
-import FilterPanel from './components/FilterPanel';
+import Sidebar from './components/Sidebar';
 
 export type Category = "all" | "cafe" | "bar" | "restaurant";
 
@@ -10,7 +10,7 @@ function App() {
 
     return (
         <>
-            <FilterPanel category={category} setCategory={setCategory} />
+            <Sidebar category={category} setCategory={setCategory} />
             <Map category={category} />
         </>
     );

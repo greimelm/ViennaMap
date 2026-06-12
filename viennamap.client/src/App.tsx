@@ -5,13 +5,19 @@ import Sidebar from './components/Sidebar';
 
 export type Category = "all" | "cafe" | "bar" | "restaurant";
 
+type Coordinates = {
+    lat: number;
+    lng: number;
+} | null;
+
 function App() {
     const [category, setCategory] = useState<Category>("all");
+    const [selectedLocation, setSelectedLocation] = useState<Coordinates>(null);
 
     return (
         <>
-            <Sidebar category={category} setCategory={setCategory} />
-            <Map category={category} />
+            <Sidebar category={category} setCategory={setCategory} onSelectedLocation={setSelectedLocation} />
+            <Map category={category} selectedLocation={setSelectedLocation} />
         </>
     );
 

@@ -4,9 +4,10 @@ import places from "../data/places.json";
 type Props = {
     category: Category;
     setCategory: (cat: Category) => void;
+    onSelectedLocation: (coords: { lat: number; lng: number }) => void;
 };
 
-export default function FilterPanel({ category, setCategory }: Props) {
+export default function FilterPanel({ category, setCategory, onSelectedLocation }: Props) {
     const filtered = category === "all" ? places : places.filter(p => p.category === category);
     // button => component
     return (
@@ -33,7 +34,11 @@ export default function FilterPanel({ category, setCategory }: Props) {
             </div>
             <ul>
                 {filtered.map(place => (
-                    <li key={place.id}>
+                    <li
+                        key={place.id}
+                        onClick={() => onSelectedLocation({ lat: place.lat, lng: place.lng })}
+                        style={{ cursor: "pointer", marginBottom: "8px" }}
+                    >
                         {place.name}
                     </li>
                 )) }

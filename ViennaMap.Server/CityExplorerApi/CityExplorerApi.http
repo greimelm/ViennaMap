@@ -1,0 +1,6 @@
+@CityExplorerApi_HostAddress = http://localhost:5296
+
+GET {{CityExplorerApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

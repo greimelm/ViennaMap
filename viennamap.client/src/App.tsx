@@ -17,7 +17,7 @@ function App() {
     return (
         <>
             <Sidebar category={category} setCategory={setCategory} onSelectedLocation={setSelectedLocation} />
-            <Map category={category} selectedLocation={setSelectedLocation} />
+            <Map category={category} selectedLocation={selectedLocation} />
         </>
     );
 

@@ -5,9 +5,11 @@ type Props = {
     category: Category;
     setCategory: (cat: Category) => void;
     onSelectedLocation: (coords: { lat: number; lng: number }) => void;
+    selectedPlaceId: number; // ?
+    onSelectPlace: (selectedPlaceId: number) => void; // ?
 };
 
-export default function FilterPanel({ category, setCategory, onSelectedLocation }: Props) {
+export default function FilterPanel({ category, setCategory, onSelectedLocation, selectedPlaceId, onSelectPlace }: Props) {
     const filtered = category === "all" ? places : places.filter(p => p.category === category);
     // button => component
     return (
@@ -36,8 +38,15 @@ export default function FilterPanel({ category, setCategory, onSelectedLocation 
                 {filtered.map(place => (
                     <li
                         key={place.id}
-                        onClick={() => onSelectedLocation({ lat: place.lat, lng: place.lng })}
-                        style={{ cursor: "pointer", marginBottom: "8px" }}
+                        onClick={() => {
+                            onSelectedLocation({ lat: place.lat, lng: place.lng });
+                            onSelectPlace(place.id);
+                        }}
+                        style={{
+                            cursor: "pointer",
+                            marginBottom: "8px",
+                            background: selectedPlaceId === place.id ? "#ddd" : "transparent" 
+                        }}
                     >
                         {place.name}
                     </li>

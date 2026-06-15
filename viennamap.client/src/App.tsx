@@ -13,11 +13,21 @@ type Coordinates = {
 function App() {
     const [category, setCategory] = useState<Category>("all");
     const [selectedLocation, setSelectedLocation] = useState<Coordinates>(null);
+    const [selectedPlaceId, setSelectedPlaceId] = useState<number | null>(null);
 
     return (
         <>
-            <Sidebar category={category} setCategory={setCategory} onSelectedLocation={setSelectedLocation} />
-            <Map category={category} selectedLocation={selectedLocation} />
+            <Sidebar
+                category={category}
+                setCategory={setCategory}
+                onSelectedLocation={setSelectedLocation}
+                selectedPlaceId={selectedPlaceId}
+            />
+            <Map
+                category={category}
+                selectedLocation={selectedLocation}
+                onSelectPlace={setSelectedPlaceId}
+            />
         </>
     );
 

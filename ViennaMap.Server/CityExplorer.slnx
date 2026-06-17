@@ -1,2 +1,6 @@
 <Solution>
+  <Project Path="CityExplorer.API/CityExplorer.API.csproj" />
+  <Project Path="CityExplorer.Application/CityExplorer.Application.csproj" />
+  <Project Path="CityExplorer.Domain/CityExplorer.Domain.csproj" />
+  <Project Path="CityExplorer.Infrastructure/CityExplorer.Infrastructure.csproj" />
 </Solution>

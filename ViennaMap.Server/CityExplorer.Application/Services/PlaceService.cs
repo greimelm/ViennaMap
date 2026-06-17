@@ -13,7 +13,7 @@ namespace ViennaMap.Server.CityExplorer.Application.Services
                 new Place { Id = 2, Name = "Bar B", Category = "bar", Lat = 48.21, Lng = 16.38 }
             };
 
-            return Task.FromResult(Place.AsEnumerable());
+            return Task.FromResult<IEnumerable<Place>>(places);
         }
     }
 }

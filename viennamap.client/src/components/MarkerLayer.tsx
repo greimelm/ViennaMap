@@ -1,7 +1,6 @@
 import { Marker, Popup } from "react-leaflet";
-import places from "../data/places.json";
 
-export default function MarkerLayer({ category, onSelectPlace }) {
+export default function MarkerLayer({ category, onSelectPlace, places }) {
 
     const filtered = category === "all" ? places : places.filter(p => p.category === category);
 

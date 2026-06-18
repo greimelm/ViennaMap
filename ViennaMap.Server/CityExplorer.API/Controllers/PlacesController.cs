@@ -14,9 +14,13 @@ namespace ViennaMap.Server.CityExplorer.API.Controllers
             _placeService = placeService;
         }
         [HttpGet]
-        public async Task<IActionResult> Get()
+        public async Task<IActionResult> Get(string? category)
         {
             var places = await _placeService.GetAllAsync();
+
+            if (!string.IsNullOrEmpty(category) && category != "all")
+                places = places.Where(p => p.Category == category);
+
             return Ok(places);
         }
     }

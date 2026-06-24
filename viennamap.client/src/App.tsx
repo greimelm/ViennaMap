@@ -15,18 +15,9 @@ function App() {
     const [category, setCategory] = useState<Category>("all");
     const [selectedLocation, setSelectedLocation] = useState<Coordinates>(null);
     const [selectedPlaceId, setSelectedPlaceId] = useState<number | null>(null);
-    const [places, setPlaces] = useState<Place[]>([]);
-    const [loading, setLoading] = useState(false);
+    // const [places, setPlaces] = useState<Place[]>([]);
+    // const [loading, setLoading] = useState(false);
 
-    useEffect(() => {
-        fetch(`http://localhost:5137/api/places?category=${category}`)
-            .then(res => res.json())
-            .then(data => {
-                setPlaces(data)
-                setLoading(false)
-            })
-            .catch(err => console.error(err));
-    }, []);
 
     return (
         <>
@@ -35,12 +26,13 @@ function App() {
                 setCategory={setCategory}
                 onSelectedLocation={setSelectedLocation}
                 selectedPlaceId={selectedPlaceId}
+                onSelectPlace={setSelectedPlaceId}
             />
             <Map
                 category={category}
                 selectedLocation={selectedLocation}
                 onSelectPlace={setSelectedPlaceId}
-                places={places}
+                // places={places}
             />
         </>
     );

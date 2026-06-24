@@ -5,8 +5,8 @@ type Props = {
     category: Category;
     setCategory: (cat: Category) => void;
     onSelectedLocation: (coords: { lat: number; lng: number }) => void;
-    selectedPlaceId: number; // ?
-    onSelectPlace: (selectedPlaceId: number) => void; // ?
+    selectedPlaceId: number;
+    onSelectPlace: (id: number) => void;
 };
 
 export default function FilterPanel({ category, setCategory, onSelectedLocation, selectedPlaceId, onSelectPlace }: Props) {

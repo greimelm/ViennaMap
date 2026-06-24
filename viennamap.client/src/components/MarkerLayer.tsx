@@ -1,6 +1,16 @@
-import { Marker, Popup } from "react-leaflet";
+import { useEffect, useState } from "react";
+import { Marker, Popup, GeoJSON } from "react-leaflet";
 
-export default function MarkerLayer({ category, onSelectPlace, places }) {
+export default function MarkerLayer({ category, onSelectPlace }) {
+    const [data, setData] = useState<any>(null);
+    useEffect(() => {
+        fetch(`http://localhost:5137/api/places?category=${category}`)
+            .then(res => res.json())
+            .then(data => {
+                setPlaces(data)
+            })
+            .catch(err => console.error(err));
+    }, []);
 
     const filtered = category === "all" ? places : places.filter(p => p.category === category);
 

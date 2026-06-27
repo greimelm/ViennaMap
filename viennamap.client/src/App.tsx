@@ -1,9 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import './App.css';
 import Map from './components/Map';
 import Sidebar from './components/Sidebar';
-import type { Place } from './types/Place';
 
+// TO DO: gather types?
 export type Category = "all" | "cafe" | "bar" | "restaurant";
 
 type Coordinates = {
@@ -31,7 +31,7 @@ function App() {
             <Map
                 category={category}
                 selectedLocation={selectedLocation}
-                onSelectPlace={setSelectedPlaceId}
+                // onSelectPlace={setSelectedPlaceId}
                 // places={places}
             />
         </>

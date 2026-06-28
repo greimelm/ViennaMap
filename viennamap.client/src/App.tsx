@@ -18,7 +18,7 @@ function App() {
     // const [places, setPlaces] = useState<Place[]>([]);
     // const [loading, setLoading] = useState(false);
 
-
+    // TO DO: Sidebar an backend anbinden (und types gathern) 
     return (
         <>
             <Sidebar

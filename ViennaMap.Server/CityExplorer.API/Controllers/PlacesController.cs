@@ -55,11 +55,12 @@ namespace ViennaMap.Server.CityExplorer.API.Controllers
                                 {
                                     type = "Point",
                                     coordinates = new[] {16.37, 48.208 }
+                                }
                             }
                         }
                     }
                 }
-            }
+            };
                 return Ok(geoJson);
         }
 

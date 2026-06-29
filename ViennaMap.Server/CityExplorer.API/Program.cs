@@ -19,6 +19,11 @@ builder.Services.AddCors(options =>
                         .AllowAnyMethod());
 }); //insecure?
 
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseSqlite("Data Source=places.db"));
+
+builder.Services.AddScoped<GeoJsonService>();
+
 var app = builder.Build();
 
 app.UseDefaultFiles();

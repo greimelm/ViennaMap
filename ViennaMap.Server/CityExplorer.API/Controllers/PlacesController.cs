@@ -8,61 +8,76 @@ namespace ViennaMap.Server.CityExplorer.API.Controllers
 
     public class PlacesController : ControllerBase
     {
-        private readonly IPlaceService _placeService;
-        public PlacesController(IPlaceService placeService)
+        //private readonly IPlaceService _placeService;
+
+        //public PlacesController(IPlaceService placeService)
+        //{
+        //    _placeService = placeService;
+        //}
+
+        private readonly GeoJsonService _geoJsonService;
+
+        public PlacesController(GeoJsonService geoJsonService)
         {
-            _placeService = placeService;
+            _geoJsonService = geoJsonService;
         }
 
         [HttpGet]
-        public IActionResult GetPlaces()
+        public async Task<IActionResult> Get(string? category)
         {
-            var geoJson = new
-            {
-                type = "FeatureCollection",
-                features = new[]
-                {
-                    new
-                    {
-                        type = "FeatureCollection",
-                        features = new[]
-                        {
-                            new
-                            {
-                                type = "Feature",
-                                properties = new
-                                {
-                                    id = 1,
-                                    name = "Cafe Central",
-                                    category = "cafe"
-                                },
-                                geometry = new
-                                {
-                                    type = "Point",
-                                    coordinates = new[] {16.365, 48.210}
-                                }
-                            },
-                            new
-                            {
-                                type = "Feature",
-                                properties = new
-                                {
-                                    id = 2,
-                                    name = "Bar Example",
-                                    category = "bar"
-                                },
-                                geometry = new
-                                {
-                                    type = "Point",
-                                    coordinates = new[] {16.37, 48.208 }
-                                }
-                            }
-                        }
-                    }
-                }
-            };
-                return Ok(geoJson);
+            var result = await _geoJsonService.GetPlaceAsync(category);
+            return Ok(result);
         }
+
+        
+        //public IActionResult GetPlaces()
+        //{
+        //    var geoJson = new
+        //    {
+        //        type = "FeatureCollection",
+        //        features = new[]
+        //        {
+        //            new
+        //            {
+        //                type = "FeatureCollection",
+        //                features = new[]
+        //                {
+        //                    new
+        //                    {
+        //                        type = "Feature",
+        //                        properties = new
+        //                        {
+        //                            id = 1,
+        //                            name = "Cafe Central",
+        //                            category = "cafe"
+        //                        },
+        //                        geometry = new
+        //                        {
+        //                            type = "Point",
+        //                            coordinates = new[] {16.365, 48.210}
+        //                        }
+        //                    },
+        //                    new
+        //                    {
+        //                        type = "Feature",
+        //                        properties = new
+        //                        {
+        //                            id = 2,
+        //                            name = "Bar Example",
+        //                            category = "bar"
+        //                        },
+        //                        geometry = new
+        //                        {
+        //                            type = "Point",
+        //                            coordinates = new[] {16.37, 48.208 }
+        //                        }
+        //                    }
+        //                }
+        //            }
+        //        }
+        //    };
+        //        return Ok(geoJson);
+        //}
 
         //public async Task<IActionResult> Get(string? category)
         //{

@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CityExplorer.Application\CityExplorer.Application.csproj" />
+    <ProjectReference Include="..\CityExplorer.Infrastructure\CityExplorer.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

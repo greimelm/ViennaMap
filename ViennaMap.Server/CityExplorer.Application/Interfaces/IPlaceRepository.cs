@@ -1,3 +1,6 @@
+using CityExplorer.Domain.Entities;
+
+namespace CityExplorer.Application.Interfaces;
 
 public interface IPlaceRepository
 {

@@ -1,36 +1,33 @@
-using CityExplorer.Domain.Entities;
-using CityExplorer.Infrastructure;
+using CityExplorer.Application.DTOs;
+using CityExplorer.Application.Interfaces;
+
+namespace CityExplorer.Application.Services;
 
 public class GeoJsonService
 {
-    private readonly AppDbContext _context;
+    private readonly IPlaceRepository _repo;
 
-    public GeoJsonService(AppDbContext context)
+    public GeoJsonService(IPlaceRepository repo)
     {
-        _context = context;
+        _repo = repo;
     }
 
-    public async Task<GeoJsonFeatureCollection> GetPlacesAsync(string? category)
+    public async Task<GeoJsonFeatureCollection> GetAllAsync()
     {
-        var query = _context.Places.AsQueryable();
-
-        if (!string.IsNullOrEmpty(category) && category != "all")
-            query = query.Where(p => p.Category == category);
-
-        var places = await query.ToListAsync();
+        var places = await _repo.GetAllAsync();
 
         var features = places.Select(p => new GeoJsonFeature
         {
+            Geometry = new
+            {
+                type = "Point",
+                coordinates = new[] { p.Lng, p.Lat }
+            },
             Properties = new
             {
                 p.Id,
                 p.Name,
                 p.Category
-            },
-            Geometry = new
-            {
-                type = "Point",
-                coordinates = new[] { p.Longitude, p.Latitude }
             }
         }).ToList();
 

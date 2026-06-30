@@ -1,15 +1,25 @@
-using ViennaMap.Server.CityExplorer.Application.Interfaces;
-using ViennaMap.Server.CityExplorer.Application.Services;
+using Microsoft.EntityFrameworkCore;
+using CityExplorer.Application.Services;
+using CityExplorer.Application.Interfaces;
+using CityExplorer.Infrastructure.Persistence;
+using CityExplorer.Infrastructure.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+//DB
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseSqlite("Data Source=cityexplorer.db"));
+
+//DI
+builder.Services.AddScoped<IPlaceRepository, PlaceRepository>();
+builder.Services.AddScoped<GeoJsonService>();
 
 builder.Services.AddControllers();
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
+builder.Services.AddEndpointsApiExplorer();
+
 builder.Services.AddOpenApi();
 
-builder.Services.AddScoped<IPlaceService, PlaceService>();
+
 
 builder.Services.AddCors(options =>
 {
@@ -19,10 +29,6 @@ builder.Services.AddCors(options =>
                         .AllowAnyMethod());
 }); //insecure?
 
-builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlite("Data Source=places.db"));
-
-builder.Services.AddScoped<GeoJsonService>();
 
 var app = builder.Build();
 

@@ -1,4 +1,4 @@
-﻿namespace ViennaMap.Server.CityExplorer.Domain.Entities
+﻿namespace CityExplorer.Domain.Entities
 {
     public class Place
     {

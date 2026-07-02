@@ -27,10 +27,16 @@ builder.Services.AddCors(options =>
         policy => policy.AllowAnyOrigin()
                         .AllowAnyHeader()
                         .AllowAnyMethod());
-}); //insecure?
+});
 
 
 var app = builder.Build();
+
+using (var scope  = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    InitialPlaceSeeder.Seed(db);
+}
 
 app.UseDefaultFiles();
 app.MapStaticAssets();

@@ -16,8 +16,6 @@ export default function MarkerLayer({ category }) {
 
     if (!data) return null;
 
-    // const filtered = category === "all" ? data : data.filter(p => p.category === category);
-
     return (
         <GeoJSON
             data={data}
@@ -46,21 +44,5 @@ export default function MarkerLayer({ category }) {
                 return L.marker(latlng);
             } }
        />
-        // <>
-        //     {filtered.map((place) => (
-        //         <Marker
-        //             key={place.id}
-        //             position={[place.lat, place.lng]}
-        //             eventHandlers={{
-        //                 click: () => onSelectPlace(place.id)
-        //             }}
-        //         >
-        //             <Popup>
-        //                 <strong>{place.name}</strong>
-        //                 <p>{place.description}</p>
-        //             </Popup>
-        //         </Marker>
-        //     ))}
-        // </>
     );
 }

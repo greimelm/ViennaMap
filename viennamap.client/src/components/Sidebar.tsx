@@ -1,16 +1,15 @@
-import type { Category } from "../App";
-import places from "../data/places.json";
+import type { FeatureCollection } from '../types/types.ts';
 
 type Props = {
-    category: Category;
-    setCategory: (cat: Category) => void;
+    category: string;
+    setCategory: (cat: string) => void;
     onSelectedLocation: (coords: { lat: number; lng: number }) => void;
     selectedPlaceId: number;
     onSelectPlace: (id: number) => void;
+    places: FeatureCollection;
 };
 
-export default function FilterPanel({ category, setCategory, onSelectedLocation, selectedPlaceId, onSelectPlace }: Props) {
-    const filtered = category === "all" ? places : places.filter(p => p.category === category);
+export default function FilterPanel({ category, setCategory, onSelectedLocation, selectedPlaceId, onSelectPlace, places }: Props) {
     // button => component
     return (
         <div className="sidebar">
@@ -33,9 +32,13 @@ export default function FilterPanel({ category, setCategory, onSelectedLocation,
                 onClick={() => setCategory("restaurant")}
                 style={{ fontWeight: category === "restaurant" ? "bold" : "normal" }}
                 >Restaurants</button>
+            <button
+                onClick={() => setCategory("store")}
+                style={{ fontWeight: category === "store" ? "bold" : "normal" }}
+            >Stores</button>
             </div>
             <ul>
-                {filtered.map(place => (
+                {places.map(place => ( //for each?
                     <li
                         key={place.id}
                         onClick={() => {

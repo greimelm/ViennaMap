@@ -2,9 +2,9 @@ import { useState } from 'react';
 import './App.css';
 import Map from './components/Map';
 import Sidebar from './components/Sidebar';
+import type { FeatureCollection } from './types/types.ts';
 
 // TO DO: gather types?
-export type Category = "all" | "cafe" | "bar" | "restaurant";
 
 type Coordinates = {
     lat: number;
@@ -12,11 +12,10 @@ type Coordinates = {
 } | null;
 
 function App() {
-    const [category, setCategory] = useState<Category>("all");
+    const [category, setCategory] = useState<string>("all");
     const [selectedLocation, setSelectedLocation] = useState<Coordinates>(null);
     const [selectedPlaceId, setSelectedPlaceId] = useState<number | null>(null);
-    // const [places, setPlaces] = useState<Place[]>([]);
-    // const [loading, setLoading] = useState(false);
+    const [data, setData] = useState<FeatureCollection | null>(null);
 
     // TO DO: Sidebar an backend anbinden (und types gathern) 
     return (
@@ -27,12 +26,13 @@ function App() {
                 onSelectedLocation={setSelectedLocation}
                 selectedPlaceId={selectedPlaceId}
                 onSelectPlace={setSelectedPlaceId}
+                places={data}
             />
             <Map
                 category={category}
                 selectedLocation={selectedLocation}
-                // onSelectPlace={setSelectedPlaceId}
-                // places={places}
+                placeData={data}
+                setPlaceData={setData}
             />
         </>
     );

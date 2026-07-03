@@ -18,4 +18,17 @@ public class PlaceRepository : IPlaceRepository
     {
         return await _context.Places.ToListAsync();
     }
+
+    public async Task<List<Place>> GetPlacesAsync(string? category)
+    {
+        var query = _context.Places.AsQueryable();
+
+        if (!string.IsNullOrEmpty(category)) 
+        {
+            query = query.Where(p => p.Category == category);
+        }
+
+        return await query.ToListAsync();
+    }
+
 }

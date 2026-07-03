@@ -21,4 +21,12 @@ public class PlacesController : ControllerBase
         var data = await _geoJsonService.GetAllAsync();
         return Ok(data);
     }
+
+    [HttpGet]
+    public async Task<IActionResult> GetPlaces([FromQuery] string? category)
+    {
+        var places = await _repo.GetPlacesAsync(category);
+        return Ok(places);
+    }
+
 }

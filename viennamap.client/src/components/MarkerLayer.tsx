@@ -1,24 +1,29 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { GeoJSON } from "react-leaflet";
 import L from "leaflet";
-import type { FeatureCollection } from '../types/types.ts';
 
-export default function MarkerLayer({ category }) {
-    const [data, setData] = useState<FeatureCollection | null>(null);
+
+export default function MarkerLayer({ category, placeData, setPlaceData }) {
+    
     useEffect(() => {
-        fetch(`http://localhost:5137/api/places?category=${category}`)
+        const url =
+            category === "all" ?
+                "http://localhost:5137/api/places" :
+                `http://localhost:5137/api/places?category=${category}`;
+
+        fetch(url)
             .then(res => res.json())
             .then(data => {
-                setData(data)
+                setPlaceData(data)
             })
             .catch(err => console.error(err));
-    }, []);
+    }, [category]);
 
-    if (!data) return null;
+    if (!placeData) return null;
 
     return (
         <GeoJSON
-            data={data}
+            data={placeData}
             filter={(feature) => {
                 if (category === "all") return true;
                 return feature.properties.category === category;

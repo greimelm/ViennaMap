@@ -11,6 +11,11 @@ type Props = {
 
 export default function FilterPanel({ category, setCategory, onSelectedLocation, selectedPlaceId, onSelectPlace, places }: Props) {
     // button => component
+    // console.log(places.features);
+    if (!places || places.features.length === 0) {
+        return <div className="sidebar">Keine Daten gefunden. Laden...</div>
+    }
+
     return (
         <div className="sidebar">
             <h2>Ciy Explorer</h2>
@@ -38,22 +43,27 @@ export default function FilterPanel({ category, setCategory, onSelectedLocation,
             >Stores</button>
             </div>
             <ul>
-                {places.map(place => ( //for each?
-                    <li
-                        key={place.id}
-                        onClick={() => {
-                            onSelectedLocation({ lat: place.lat, lng: place.lng });
-                            onSelectPlace(place.id);
-                        }}
-                        style={{
-                            cursor: "pointer",
-                            marginBottom: "8px",
-                            background: selectedPlaceId === place.id ? "#ddd" : "transparent" 
-                        }}
-                    >
-                        {place.name}
-                    </li>
-                )) }
+                {places.features.map((feature, index) => { // FeatureCollection = object, features is array in this object
+                    const lat = feature.geometry.coordinates[1];
+                    const lng = feature.geometry.coordinates[0];
+
+                    return (
+                        <li
+                            key={index}
+                            onClick={() => {
+                                onSelectedLocation({ lat, lng });
+                                onSelectPlace(index);
+                            }}
+                            style={{
+                                cursor: "pointer",
+                                marginBottom: "8px",
+                                background: selectedPlaceId === index ? "#ddd" : "transparent"
+                            }}
+                        >
+                            {feature.properties.name}
+                        </li>
+                    );
+                })}
             </ul>
         </div>
     );

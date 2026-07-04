@@ -17,12 +17,13 @@ export default function MarkerLayer({ category, placeData, setPlaceData }) {
                 setPlaceData(data)
             })
             .catch(err => console.error(err));
-    }, [category]);
+    }, [category, setPlaceData]);
 
     if (!placeData) return null;
 
     return (
         <GeoJSON
+            // key={category}
             data={placeData}
             filter={(feature) => {
                 if (category === "all") return true;
@@ -46,7 +47,21 @@ export default function MarkerLayer({ category, placeData, setPlaceData }) {
                 };
             }}
             pointToLayer={(feature, latlng) => {
-                return L.marker(latlng);
+                const cat = feature.properties.category;
+
+                let color =
+                    cat === "cafe" ? "brown" :
+                        cat === "bar" ? "red" :
+                            cat === "restaurant" ? "orange" :
+                                cat === "store" ? "green" :
+                                    "blue";
+                return L.circleMarker(latlng, {
+                    radius: 8,
+                    fillColor: color,
+                    color: "#000",
+                    weight: 1,
+                    fillOpacity: 0.8
+                });
             } }
        />
     );

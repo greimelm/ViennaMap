@@ -12,28 +12,24 @@ public class GeoJsonService
         _repo = repo;
     }
 
-    public async Task<GeoJsonFeatureCollection> GetAllAsync()
+    public async Task<GeoJsonFeatureCollection> GetAllAsync(string? category)
     {
-        var places = await _repo.GetAllAsync();
-
-        var features = places.Select(p => new GeoJsonFeature
-        {
-            Geometry = new
-            {
-                type = "Point",
-                coordinates = new[] { p.Lng, p.Lat }
-            },
-            Properties = new
-            {
-                p.Id,
-                p.Name,
-                p.Category
-            }
-        }).ToList();
+        var places = await _repo.GetPlacesAsync(category);
 
         return new GeoJsonFeatureCollection
-        { 
-            Features = features
+        {
+            Features = places.Select(p => new GeoJsonFeature
+            {
+                Geometry = new Geometry
+                {
+                    Coordinates = new[] { p.Lng, p.Lat }
+                },
+                Properties = new Properties
+                {
+                    Name = p.Name,
+                    Category = p.Category
+                }
+            }).ToList()
         };
     }
 }

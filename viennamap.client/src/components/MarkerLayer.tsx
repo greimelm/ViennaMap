@@ -20,10 +20,10 @@ export default function MarkerLayer({ category, placeData, setPlaceData }) {
     }, [category, setPlaceData]);
 
     if (!placeData) return null;
-
+    console.log(placeData); // kommt hier 4-mal hin?
     return (
         <GeoJSON
-            // key={category}
+            key={placeData?.features[0]?.properties?.category || placeData?.features?.length}
             data={placeData}
             filter={(feature) => {
                 if (category === "all") return true;
@@ -49,7 +49,7 @@ export default function MarkerLayer({ category, placeData, setPlaceData }) {
             pointToLayer={(feature, latlng) => {
                 const cat = feature.properties.category;
 
-                let color =
+                const color =
                     cat === "cafe" ? "brown" :
                         cat === "bar" ? "red" :
                             cat === "restaurant" ? "orange" :

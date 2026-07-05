@@ -17,7 +17,6 @@ function App() {
     const [selectedPlaceId, setSelectedPlaceId] = useState<number | null>(null);
     const [data, setData] = useState<FeatureCollection | null>(null);
 
-    // TO DO: Sidebar an backend anbinden (und types gathern) 
     return (
         <>
             <Sidebar

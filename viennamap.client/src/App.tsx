@@ -32,6 +32,7 @@ function App() {
                 selectedLocation={selectedLocation}
                 placeData={data}
                 setPlaceData={setData}
+                onSelectPlace={setSelectedPlaceId}
             />
         </>
     );

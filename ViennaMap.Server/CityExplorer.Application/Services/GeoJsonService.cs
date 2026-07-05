@@ -26,6 +26,7 @@ public class GeoJsonService
                 },
                 Properties = new Properties
                 {
+                    Id = p.Id,
                     Name = p.Name,
                     Category = p.Category
                 }

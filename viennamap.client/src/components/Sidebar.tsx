@@ -1,3 +1,4 @@
+import { useRef } from 'react';
 import type { FeatureCollection } from '../types/types.ts';
 
 type Props = {
@@ -10,6 +11,9 @@ type Props = {
 };
 
 export default function FilterPanel({ category, setCategory, onSelectedLocation, selectedPlaceId, onSelectPlace, places }: Props) {
+
+    const itemRefs = useRef<{ [key: number]: HTMLLIElement | null }>({});
+
     // button => component
     // console.log(places.features);
     if (!places || places.features.length === 0) {
@@ -42,14 +46,22 @@ export default function FilterPanel({ category, setCategory, onSelectedLocation,
                 style={{ fontWeight: category === "store" ? "bold" : "normal" }}
             >Stores</button>
             </div>
-            <ul>
+            <ul
+                style={{
+                    listStyleType: "none",
+                    paddingInlineStart: 0
+                } }
+            >
                 {places.features.map((feature, index) => { // FeatureCollection = object, features is array in this object
                     const lat = feature.geometry.coordinates[1];
                     const lng = feature.geometry.coordinates[0];
-
+                    // click on list item -> zoom in on map
                     return (
                         <li
                             key={index}
+                            ref={(el) => {
+                                itemRefs.current[index] = el;
+                            }}
                             onClick={() => {
                                 onSelectedLocation({ lat, lng });
                                 onSelectPlace(index);

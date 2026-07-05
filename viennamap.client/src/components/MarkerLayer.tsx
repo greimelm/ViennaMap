@@ -3,7 +3,7 @@ import { GeoJSON } from "react-leaflet";
 import L from "leaflet";
 
 
-export default function MarkerLayer({ category, placeData, setPlaceData }) {
+export default function MarkerLayer({ category, placeData, setPlaceData, onSelectPlace }) {
     
     useEffect(() => {
         const url =
@@ -23,7 +23,7 @@ export default function MarkerLayer({ category, placeData, setPlaceData }) {
     console.log(placeData); // kommt hier 4-mal hin?
     return (
         <GeoJSON
-            key={placeData?.features[0]?.properties?.category || placeData?.features?.length}
+            key={placeData?.features[0]?.properties?.category || placeData?.features?.length} // früher oder später auf leaflet layers umsteigen
             data={placeData}
             filter={(feature) => {
                 if (category === "all") return true;
@@ -35,7 +35,11 @@ export default function MarkerLayer({ category, placeData, setPlaceData }) {
                 layer.bindPopup(
                     `<b>${props.name}</b><br/>
                     Kategorie: ${props.category}`
-                )
+                );
+                layer.on("click", () => {
+                    onSelectPlace(props.id - 1);
+                    console.log("Props:", props);
+                });
             }}
             style={(feature) => {
                 const cat = feature.properties.category;

@@ -1,6 +1,6 @@
 # ViennaMap
 
-Interaktive Web-App zur Darstellung und Filterung von Orten (Cafés, Bars, Restaurants, Einkaufsläden) auf einer Karte. \
+Interaktive Web-App zur Darstellung und Filterung von Orten (Cafés, Bars, Restaurants, Einkaufsläden) auf einer Karte. 
 
 ![Screenshot interaktive Karte](/images/dummy-screenshot0607.png)
 

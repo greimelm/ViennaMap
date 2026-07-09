@@ -6,6 +6,7 @@ using CityExplorer.Infrastructure.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
+//TO DO: find live API for regular update
 //DB
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlite("Data Source=cityexplorer.db"));

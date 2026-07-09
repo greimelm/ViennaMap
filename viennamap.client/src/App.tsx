@@ -2,18 +2,11 @@ import { useState } from 'react';
 import './App.css';
 import Map from './components/Map';
 import Sidebar from './components/Sidebar';
-import type { FeatureCollection } from './types/types.ts';
-
-// TO DO: gather types?
-
-type Coordinates = {
-    lat: number;
-    lng: number;
-} | null;
+import type { FeatureCollection, Coordinates } from './types/types.ts';
 
 function App() {
     const [category, setCategory] = useState<string>("all");
-    const [selectedLocation, setSelectedLocation] = useState<Coordinates>(null);
+    const [selectedLocation, setSelectedLocation] = useState<Coordinates | null>(null);
     const [selectedPlaceId, setSelectedPlaceId] = useState<number | null>(null);
     const [data, setData] = useState<FeatureCollection | null>(null);
 

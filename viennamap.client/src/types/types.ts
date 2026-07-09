@@ -15,4 +15,9 @@ export type PlaceFeature = {
 export type FeatureCollection = {
     type: "FeatureCollection";
     features: PlaceFeature[];
-}
+};
+
+export type Coordinates = {
+    lat: number;
+    lng: number;
+};
